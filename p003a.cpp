@@ -1,6 +1,8 @@
 //Project Euler #3 : Largest Prime factor
 #include<iostream>
 #include<cstring>
+#include<vector>
+
 using namespace std;
 
 int main()
@@ -14,8 +16,8 @@ int main()
 		cin>>n;
 
 		//Sieve of Erastothenes
-		bool prime[n+1];
-		memset(prime, true, sizeof(prime));
+		vector<bool> prime(n+1, true);
+		// memset(prime, true, sizeof(prime));
 		for(long p=2; p<=n; p++)
 		{
 			if(prime[p] == true)
