@@ -21,14 +21,16 @@ int main()
 		cin>>number;
 
 		int i=0;
-		int max = 1;
+		int max = 0;
 
-		while(i<n-k)
+		while(i<n-k + 1)
 		{
 			int result = 1;
 			for(int j=i; j<i+k; j++)
 			{
 				int temp = (int)number[j];
+
+				temp = temp - 48;		//ASCII correction
 				result = result * temp;
 			}
 
@@ -38,9 +40,8 @@ int main()
 			}
 			i++;
 		}
-		cout<<endl;
-		cout<<number<<endl;
-		cout<<max;
-		return 0;
+
+		cout<<max<<endl;
 	}
+	return 0;	
 }
