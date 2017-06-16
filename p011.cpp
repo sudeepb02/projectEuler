@@ -7,8 +7,7 @@ int main()
 	const int n = 20;
 	const int p = 4;
 
-	int matrix[n][n];
-
+	vector<vector<int>> matrix(n, vector<int>(20));
 
 	for(int i=0; i<n; ++i)
 	{
