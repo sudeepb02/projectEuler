@@ -13,16 +13,17 @@ int main()
 		int input, result;
 		cin>>input;
 
-		int n = 1;
+		int tnumber = 1;
+		int index = 1;
 		while(true)
 		{
-			long long number = (n*(n+1)/2);
-			if(numberOfFactors(number) > input)
+			if(numberOfFactors(tnumber) > input)
 			{
-				result = number;
+				result = tnumber;
 				break;
 			}
-			n++;
+			index++;
+			tnumber+= index;
 		}
 
 		cout<<result<<endl;
