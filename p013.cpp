@@ -7,10 +7,21 @@ string add(string&, string&);
 
 int main()
 {
-	string s1, s2, result;
-	cin>>s1>>s2;
+	int n;
+	cin>>n;
 
-	result = add(s1, s2);
+	string *str = new string[n];
+	string result = "000";
+
+	for(int i=0; i<n; i++)
+	{
+		cin>>str[i];
+	}
+
+	for(int i=0; i<n; i++)
+	{
+		result = add(result, str[i]);
+	}
 
 	cout<<result;
 	return 0;
@@ -58,6 +69,7 @@ string add(string &s1, string &s2)
 		i--;
 	}
 
+	
 	return result;
 
 }
