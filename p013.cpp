@@ -23,7 +23,11 @@ int main()
 		result = add(result, str[i]);
 	}
 
-	cout<<result;
+	for(int i=0; i<10; i++)
+	{
+		cout<<result[i];
+	}
+
 	return 0;
 }
 
@@ -69,7 +73,10 @@ string add(string &s1, string &s2)
 		i--;
 	}
 
-	
-	return result;
+	if(carry!=0)
+	{
+		result = (char)(carry + '0') + result;
+	}
 
+	return result;
 }
