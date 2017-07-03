@@ -7,11 +7,17 @@ long long Combination(int n, int r);
 
 int main()
 {
-	int m, n;
-	//n rows, m columns
-	cin>>n>>m;
+	int t;
+	cin>>t;
 
-	cout<<Combination(m+n, m);
+	for(int ti=0; ti<t; ti++)
+	{
+		int m, n;
+		//n rows, m columns
+		cin>>n>>m;
+
+		cout<<Combination(m+n, m)<<endl;
+	}
 
 	return 0;
 }
@@ -19,6 +25,7 @@ int main()
 //To generate nCr i.e C(n, r)
 long long Combination(int n, int r)
 {
+	long long mod = 1000000007;
 	vector< vector<long long>> cmat( n+1, vector<long long>(r+1, 0));
 
 	for(int i=0; i<=n; i++)
@@ -33,7 +40,7 @@ long long Combination(int n, int r)
 			else
 			{
 				//C(n, r) = C(n-1, r-1) + C(n-1, r)
-				cmat[i][j] = (cmat[i-1][j-1] + cmat[i-1][j]);
+				cmat[i][j] = (cmat[i-1][j-1] + cmat[i-1][j])%mod;
 			}
 		}
 	}
