@@ -23,7 +23,24 @@ int main()
 
 int calculateSum(int n)
 {
-	int result = -1;
-	
-	return result;
+	//Calculate length of digits
+	int len = static_cast<int>(1 + floor(n/log2(10)));
+
+	//To store the result in character array
+	char *str = new char[len +1];
+
+	//Calculate 2^n and write it to str instead of stdout
+	sprintf(str, "%0.Lf", exp2((long double)n));
+
+	int sum = 0;
+
+	//Add all the digits
+	for(int i=0; i<len; i++)
+	{
+		sum+= static_cast<int>(str[i] - '0');
+	}
+
+	delete[] str;
+
+	return sum;
 }
