@@ -23,7 +23,12 @@ int main()
 
 		while(number>0)
 		{
-			result = spell(number%1000) + " " + placeValue[index] + result;
+			int temp = number%1000;
+
+			if(temp)
+			{
+				result = spell(number%1000) + placeValue[index] + " " + result;
+			}
 			number /= 1000;
 			index++;
 		}
@@ -44,9 +49,9 @@ string spell(int n)
 
 	string result = "";
 
-	vector<string> under20 = {"", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine", " Ten", " Eleven", " Twelve", " Thirteen", " Fourteen", " Fifteen", " Sixteen", " Seventeen", " Eighteen", " Nineteen"};
+	vector<string> under20 = {"", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "};
 	
-	vector<string> tens = {"", "", " Twenty", " Thirty", " Forty", " Fifty", " Sixty", " Seventy", " Eighty", " Ninety"};
+	vector<string> tens = {"", "", "Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety "};
 	int last2 = n%100;
 
 	if(last2 < 20)
@@ -66,7 +71,7 @@ string spell(int n)
 	n /= 100;
 	if(n!=0)
 	{
-		result = under20[n] + " Hundred" + result;
+		result = under20[n] + "Hundred " + result;
 	}
 	
 	return result;
