@@ -5,32 +5,38 @@ using namespace std;
 
 int main()
 {
-	int n;
-	cin>>n;
+	int t;
+	cin>>t;
 
-	vector<vector<int>> arr(n);
-
-	int temp;
-	//Read the input elements
-	for(int i=0; i<n; i++)
+	for(int ti=0; ti<t; ti++)
 	{
-		for(int j=0; j<=i; j++)
-		{
-			cin>>temp;
-			arr[i].push_back(temp);
-		}
-	}
+		int n;
+		cin>>n;
 
-	//Start from last second row and upwards
-	for(int i=n-2;i>=0; i--)
-	{
-		for(int j=0; j<=i; j++)
-		{
-			arr[i][j] = arr[i][j] + max(arr[i+1][j], arr[i+1][j+1]);
-		}
-	}
+		vector<vector<int>> arr(n);
 
-	cout<<"Maximum cost : "<<arr[0][0];
+		int temp;
+		//Read the input elements
+		for(int i=0; i<n; i++)
+		{
+			for(int j=0; j<=i; j++)
+			{
+				cin>>temp;
+				arr[i].push_back(temp);
+			}
+		}
+
+		//Start from last second row and upwards
+		for(int i=n-2;i>=0; i--)
+		{
+			for(int j=0; j<=i; j++)
+			{
+				arr[i][j] = arr[i][j] + max(arr[i+1][j], arr[i+1][j+1]);
+			}
+		}
+
+		cout<<arr[0][0]<<endl;
+	}
 
 	return 0;
 }
