@@ -4,6 +4,8 @@
 using namespace std;
 
 int getYearCode(int);
+int getDay(int, int, int);
+int monthCodes[13] = {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
 
 int main()
 {
@@ -13,31 +15,55 @@ int main()
 	cin>>y1>>m1>>d1;
 	cin>>y2>>m2>>d2;
 
-	int monthCodes[13] = {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
 	int result = 0;
 
-	for(int i=y1; i<=y2; i++)
+	//Check for boundary years
+
+	if(d1 > 1){ m1++; }		//Check from next month since 1st of month already passed
+	
+	if(y1 != y2)
+	{
+		for(int p=m1; p<=12; p++)
+		{
+			if(getDay(y1, p, 1) == 0)
+			{
+				cout<<y1<<" "<<p<<" "<<"1 \n";
+				result++;
+			}
+		}
+
+		for(int p=1; p<=m2; p++)
+		{
+			if(getDay(y2, p, 1) == 0)
+			{
+				cout<<y2<<" "<<p<<" "<<"1 \n";
+				result++;
+			}
+		}
+	
+	}
+	else
+	{
+		for(int p=m1; p<=m2; p++)
+		{
+			if(getDay(y1, p, 1) == 0)
+			{
+				cout<<y1<<" "<<p<<" "<<"1 \n";
+				result++;
+			}
+		}
+	}
+
+	
+	for(int i=y1+1; i<y2; i++)
 	{
 		int yearCode = getYearCode(i);
 
 		for(int j=1; j<=12; j++)
 		{
-			int sum = 0;
-			
-			//Add yearCode and month code to sum
-			sum = sum + yearCode + monthCodes[j];
-
-			//Add number of leap years and last two digits of year
-			sum = sum + (i%100) + static_cast<int>((i%100)/4);
-
-			//Add given date i.e 1sst of month
-			sum++;
-
-			int od = sum % 7;
-
-			//If the day is Sunday i.e remainder is 0
-			if(od == 0)
+			if(getDay(i, j, 1) == 0)
 			{
+				cout<<i<<" "<<j<<" "<<"1 \n";
 				result++;
 			}
 
@@ -50,12 +76,29 @@ int main()
 
 }
 
+int getDay(int y, int m, int d)
+{
+	int sum = 0;
+
+	//Add yearCode and monthcode
+	sum = sum + getYearCode(y) + monthCodes[m];
+
+	//Add number of leap years, last two digits of year
+	int temp = y%100;
+	temp--;
+	sum = sum + (temp) + static_cast<int>(temp/4);
+
+	//Add date
+	sum += d;
+
+	return (sum % 7);
+}
+
 int getYearCode(int y)
 {
 	int yearCode = 0;
 	int temp = y % 400;
 
-	//Add year code to sum
 	if(temp <= 99)
 	{
 		yearCode = 6;
