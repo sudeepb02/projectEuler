@@ -1,42 +1,51 @@
-//Problem #20 : 
+//Problem #20 : Facotrial digit sum
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main()
 {
-	int n;
-	cin>>n;
+	int t;
+	cin>>t;
 
-	vector<int> fact(1000);
+	vector<int> fact(1000);		//To store each digit of factorial
 
-	int carry = 0;
-	int counter = 1;
-
-	fact[0] = 1;
-
-	for(int i=1; i<=n; i++)
+	for(int ti=0; ti<t; ti++)
 	{
-		for(int j=0; j<counter; j++)
+		int n;
+		cin>>n;
+
+		long sum = 0;
+
+		int carry = 0;
+		int counter = 1;
+
+		fact[0] = 1;
+
+		for(int i=1; i<=n; i++)
 		{
-			int prod = fact[j]*i + carry;
-			fact[j] = prod % 10;
-			carry = prod/10;
+			for(int j=0; j<counter; j++)
+			{
+				int prod = fact[j]*i + carry;
+				fact[j] = prod % 10;
+				carry = prod/10;
+			}
+
+			while(carry > 0)
+			{
+				fact[counter] = carry % 10;
+				carry /= 10;
+				counter++;
+			}
 		}
 
-		while(carry > 0)
+		//Calcualte sum of all digits
+		for(int i=counter-1; i>=0; i--)
 		{
-			fact[counter] = carry % 10;
-			carry /= 10;
-			counter++;
+			sum += fact[i];
 		}
-	}
 
-	//Print the factorial
-	for(int i=counter-1; i>=0; i--)
-	{
-		cout<<fact[i];
+		cout<<sum<<endl;
 	}
-
 	return 0;
 }
