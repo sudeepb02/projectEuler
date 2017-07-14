@@ -1,37 +1,74 @@
 //Problem #21
 #include <iostream>
+#include <cmath>
+
 using namespace std;
 long sumOfDivisors(long);
 
 int main()
 {
-	int n;
-	cin>>n;
+	int t;
+	cin>>t;
 
-	//Start from 200
-	for(int i=200; i<=n; i++)
+	for(int ti=0; ti<t; ti++)
 	{
-		long a = sumOfDivisors(i);
-		long b = sumOfDivisors(a);
+		int n;
+		cin>>n;
 
-		if(b == i && a != i)
+		long result = 0;
+
+		//Start from 200
+		for(int i=200; ; i++)
 		{
-			cout<<"( "<<b<<", "<<a<<" )"<<endl;
-		}
-	}
+			long a = sumOfDivisors(i);
+			long b = sumOfDivisors(a);
 
+			if(b == i && a != i)
+			{
+				if(a <= n)
+				{
+					result += a;
+				}
+				else
+				{
+					break;
+				}
+				// cout<<"( "<<b<<", "<<a<<" )"<<endl;
+			}
+		}
+
+		cout<<result<<endl;
+	}
 	return 0;
 }
 
 long sumOfDivisors(long n)
 {
+	long temp = n;
 	long sum = 1;
-	for(int i=2; i<n; i++)
+	int factor = 2;
+
+	while(factor <= n)
 	{
-		if(n % i == 0)
+		int count = 0;
+		while(n % factor == 0)
 		{
-			sum += i;
+			n /= factor;
+			count++;
 		}
+
+		int p = 1;
+		for(int i=1; i<=count; i++)
+		{
+			// cout<<"Adding to sum " <<pow(factor, i)<<endl;
+			// sum = sum + pow(factor, i);
+			p += pow(factor, i);
+		}
+
+		sum *= p;
+		factor++;
+
 	}
-	return sum;
+
+	return sum - temp;
 }
