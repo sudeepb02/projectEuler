@@ -26,9 +26,24 @@ int main()
 long long Combination(int n, int r)
 {
 	long long mod = 1000000007;
-	vector< vector<long long>> cmat( n+1, vector<long long>(r+1, 0));
+	vector<long> cmat(r+1, 0);
 
-	for(int i=0; i<=n; i++)
+	cmat[0] = 1;
+
+	for(int i=1; i<=n; i++)
+	{
+		for(int j= min(i, r); j>0; j--)
+		{
+			cmat[j] = (cmat[j] + cmat[j-1]) % mod;
+		}
+	}
+	
+	return cmat[r];
+}
+	//This method uses 2D array to compute C(n, r)
+	// vector< vector<long long>> cmat( n+1, vector<long long>(r+1, 0));
+
+/*	for(int i=0; i<=n; i++)
 	{
 		for(int j=0; j<=r && j<=i; j++)
 		{
@@ -47,3 +62,4 @@ long long Combination(int n, int r)
 
 	return cmat[n][r];
 }
+*/
