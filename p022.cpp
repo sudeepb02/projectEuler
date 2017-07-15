@@ -33,12 +33,31 @@ int main()
 		{
 			s = s + (names[i])[j] - 'A' + 1;
 		}
-		score[i] = s;
+		score[i] = s * (i+1);
 	}
-	for(int i=0; i<n; i++)
+
+	//Answer the queries
+	int q;
+	cin>>q;
+
+	for(int qi=0; qi<q; qi++)
 	{
-		cout<<names[i]<<"\t"<<score[i]<<endl;
+		cin>>temp;
+
+		for(int si=0; si<n; si++)
+		{
+			if(names[si] == temp)
+			{
+				cout<<score[si]<<endl;
+				break;
+			}
+		}
 	}
+
+	// for(int i=0; i<n; i++)
+	// {
+	// 	cout<<names[i]<<"\t"<<score[i]<<endl;
+	// }
 
 	return 0;
 }
