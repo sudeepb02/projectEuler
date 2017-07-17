@@ -2,9 +2,9 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define LIMIT 3000
+#define LIMIT 28123
 
-vector<int> abundantNumber(LIMIT, 0);
+int abundantNumber[LIMIT+1] = {0};
 void generateAbundant();
 
 int main()
@@ -13,8 +13,35 @@ int main()
 	cin>>t;
 
 	generateAbundant();
-	
-	
+
+	for(int ti=0; ti<t; ti++)
+	{
+		cin>>n;
+		if(n>28123)		//All numbers above 28123 can be represented
+		{
+			cout<<"YES"<<endl;
+		}
+		else
+		{
+			bool flag = false;
+			for(int i=6; i<n; i++)
+			{
+				if(abundantNumber[i] && abundantNumber[n-i])
+				{
+					flag = true;
+					break;
+				}
+			}
+			if(flag)
+			{
+				cout<<"YES"<<endl;
+			}
+			else
+			{
+				cout<<"NO"<<endl;
+			}
+		}
+	}
 
 	return 0;
 }
