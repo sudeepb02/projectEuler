@@ -6,20 +6,19 @@ using namespace std;
 
 int main()
 {
-	string s = "abcdefghijklm";
-
-	vector<char> letters;
-
-	for(int i=0; i<s.length(); i++)
-	{
-		letters.push_back(s[i]);
-	}
-
 	int t;
 	cin>>t;
 
 	for(int ti=0; ti<t; ti++)
 	{
+		vector<int> letters;
+		string s = "";
+
+		for(int i=0; i<13; i++)
+		{
+			letters.push_back(i);
+		}
+
 		long n;
 		cin>>n;
 
@@ -27,15 +26,18 @@ int main()
 	
 		do
 		{
-			if(count == n){break;}
-
-			s = "";
-			for(int i=0; i<letters.size(); i++)
+			if(count != n){count++;}
+			else
 			{
-				s += letters[i];
+					s = "";
+				for(int i=0; i<letters.size(); i++)
+				{
+					// cout<<letters[i];
+					s += ('a' + letters[i]);
+				}
+				// cout<<endl;
+				break;
 			}
-			count++;
-
 
 		}while(next_permutation(letters.begin(), letters.end()));
 
