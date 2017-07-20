@@ -7,38 +7,59 @@ using namespace std;
 
 int main()
 {
-	long n;
-	cin>>n;
+	int t;
+	cin>>t;
 
-	vector<char> letters;
-	for(int i=0; i<13; i++)
+	for(int ti=0; ti<t; ti++)
 	{
-		letters.push_back(static_cast<char>('a' + i));
-	}
+		long n;
+		cin>>n;
 
-	//To store n as factoradic number
-	vector<int> fnumber;
-	int index = 1;
-	while(n!= 0)
-	{
-		int rm = n % index;
-		fnumber.push_back(rm);
-		n /= index;
-		index++;
-	}
+		n--;
+		vector<char> letters;
+		for(int i=0; i<13; i++)
+		{
+			letters.push_back(static_cast<char>('a' + i));
+		}
 
-	while(fnumber.size() != 13)
-	{
-		fnumber.push_back(0);
-	}
-	std::reverse(fnumber.begin(), fnumber.end());
+		//To store n as factoradic number
+		vector<int> fnumber;
+		int index = 1;
+		while(n!= 0)
+		{
+			int rm = n % index;
+			fnumber.push_back(rm);
+			n /= index;
+			index++;
+		}
 
-	//Generate the nth permutation
-	string result = "";
+		while(fnumber.size() != 13)
+		{
+			fnumber.push_back(0);
+		}
+		std::reverse(fnumber.begin(), fnumber.end());
 
-	for(int i=0; i<fnumber.size(); i++)
-	{
-		cout<<fnumber[i];
+
+		//Generate the nth permutation
+		string result = "";
+		int idx;
+		int count = 0;
+
+		while(count < 13)
+		{
+			idx = fnumber[count];
+			result = result + letters[idx];
+
+			letters.erase(letters.begin() + idx);
+			count++;
+		}
+
+		// for(int i=0; i<fnumber.size(); i++)
+		// {
+		// 	cout<<fnumber[i];
+		// }
+
+		cout<<result<<endl;
 	}
 	return 0;
 }
