@@ -3,28 +3,34 @@ using namespace std;
 
 int main()
 {
+	long t;
+	cin>>t;
 	long idx, sum, dcount, curr;
 	long n;
 	long mod = 1000000007;
-	cin>>n;
-	idx = 2;	//To track the spiral number
-	sum = 1;	//Final sum
-	dcount = 0;	//for diagonal count
-	curr = 1;	//Current number in spiral
 
-	while(idx <=n)
+	for(int ti=0; ti<t; ti++)
 	{
-		sum = sum + curr + idx;
-		curr += idx;
-		dcount++;
+		cin>>n;
+		idx = 2;	//To track the spiral number
+		sum = 1;	//Final sum
+		dcount = 0;	//for diagonal count
+		curr = 1;	//Current number in spiral
 
-		if(dcount % 4 == 0)
+		while(idx <=n)
 		{
-			dcount = 0;
-			idx += 2;
-		}
-	}
+			sum = sum + curr + idx;
+			curr += idx;
+			dcount++;
 
-	cout<<sum;
+			if(dcount % 4 == 0)
+			{
+				dcount = 0;
+				idx += 2;
+			}
+			sum %= mod;
+		}
+		cout<<sum<<endl;
+	}
 	return 0;
 }
