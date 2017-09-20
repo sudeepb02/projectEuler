@@ -35,9 +35,10 @@ int main()
 		{
 			bool flag = true;
 			nodigits = getNumberOfDigits(j);
+			temp = j;
 			while(nodigits > 0)
 			{
-				temp = rotate(j);
+				temp = rotate(temp);
 				if(!primes[temp])
 				{
 					flag = false;
@@ -47,7 +48,7 @@ int main()
 			if(flag)
 			{
 				finalSum += j;
-				cout<<j<<endl;
+				// cout<<j<<endl;
 			}
 		}
 	}
