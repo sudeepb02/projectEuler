@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 long reverse(long);
+int getdigits(long);
 
 int main()
 {
@@ -12,6 +14,7 @@ int main()
 	vector<bool> primes(n+1, true);
 
 	//Sieve of Eratosthenes
+	primes[1] = false;		
 	for(long i=2; i<=n; i++)
 	{
 		if(primes[i])
@@ -31,31 +34,36 @@ int main()
 		bool left, right;
 		left = right = true;
 
-		//Truncate right
-		while(temp > 0)
+		if(primes[i])
 		{
-			if(!primes[temp])
+			//Truncate right
+			while(temp > 0)
 			{
-				right = false;
-			}
-			temp /= 10;
-		}
+				temp /= 10;
+				if(!primes[temp])
+				{
+					right = false;
+				}
 
-		//Truncate right
-		temp = reverse(i);
-		while(temp > 0)
-		{
-			if(!primes[temp])
+			}
+
+			//Truncate left
+			int dig = getdigits(i);
+			while(dig > 0)
 			{
-				left = false;
+				dig--;
+				temp = i % static_cast<int>(pow(10, dig));
+				if(!primes[temp])
+				{
+					left = false;
+				}
 			}
-			temp /= 10;
-		}
 
-		if(left && right)
-		{
-			cout<<i<<endl;
-			sum += i;
+			if(right && left)
+			{
+				// cout<<i<<endl;
+				sum += i;
+			}
 		}
 	}
 
@@ -76,4 +84,16 @@ long reverse(long n)
 		n /= 10;
 	}
 	return result;
+}
+
+int getdigits(long n)
+{
+	int dig = 0;
+	while(n > 0)
+	{
+		dig++;
+		n /= 10;
+	}
+
+	return dig;
 }
